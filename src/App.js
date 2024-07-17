@@ -1,9 +1,10 @@
 
 import './App.css';
+import Body from './components/Body';
 
 function App() {
   return (
-    <div className='text-4xl font-bold text-red-700'>Hello ji kya haal chal</div>
+    <Body/>
   );
 }
 
