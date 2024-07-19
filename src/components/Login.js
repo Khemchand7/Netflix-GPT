@@ -8,17 +8,23 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import {
+  GOOGLE_POLICIES_URL,
+  GOOGLE_TOS_URL,
+  LEARN_MORE_TEXT1,
+  LEARN_MORE_TEXT2,
+  NETFLIX_BGD_IMG,
+  USER_AVATAR,
+} from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [showData, setShowData] = useState(false);
   const [showError, setShowError] = useState(false);
-  const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -43,19 +49,28 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          
+
           updateProfile(user, {
-            displayName: fullNameRef.current.value
-          }).then(() => {
-            // Profile updated!
-            const { uid, email, displayName } = user;
-            dispatch(addUser({ uid: uid, email: email, displayName: displayName }));//yahan pr yeh store dobara update islie dobara se store update kia kyuki 
-            //profile update ke bad null de rha tha at first bcs us time tak onAuth Change me null jaa rha tha 
-            navigate("/browse");
-          }).catch((error) => {
-            // An error occurred
-            setShowError(error.message);
-          });
+            displayName: fullNameRef.current.value,
+            photoURL: USER_AVATAR,
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName, photoURL } = user;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              ); //yahan pr yeh store dobara update islie dobara se store update kia kyuki
+              //profile update ke bad null de rha tha at first bcs us time tak onAuth Change me null jaa rha tha
+            })
+            .catch((error) => {
+              // An error occurred
+              setShowError(error.message);
+            });
           console.log(user);
         })
         .catch((error) => {
@@ -73,7 +88,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          navigate("/browse");
           console.log(user);
         })
         .catch((error) => {
@@ -95,7 +109,7 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/8728e059-7686-4d2d-a67a-84872bd71025/e90516bd-6925-4341-a6cf-0b9f3d0c140a/IN-en-20240708-POP_SIGNUP_TWO_WEEKS-perspective_WEB_34324b52-d094-482b-8c2a-708dc64c9065_small.jpg"
+          src={NETFLIX_BGD_IMG}
           alt="Background Img"
           className="object-cover w-full h-full"
         ></img>
@@ -181,10 +195,9 @@ const Login = () => {
             >
               {showData ? (
                 <p className="text-[#ffffffb3]">
-                  The information collected by Google reCAPTCHA is subject to
-                  the Google{" "}
+                  {LEARN_MORE_TEXT1}
                   <a
-                    href="https://policies.google.com/privacy"
+                    href={GOOGLE_POLICIES_URL}
                     className="underline text-blue-700"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -193,16 +206,14 @@ const Login = () => {
                   </a>{" "}
                   and{" "}
                   <a
-                    href="https://policies.google.com/terms"
+                    href={GOOGLE_TOS_URL}
                     className="underline text-blue-700"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     Terms of Service
                   </a>
-                  , and is used for providing, maintaining, and improving the
-                  reCAPTCHA service and for general security purposes (it is not
-                  used for personalised advertising by Google).
+                  {LEARN_MORE_TEXT2}
                 </p>
               ) : (
                 "Learn more"
