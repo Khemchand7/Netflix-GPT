@@ -1,31 +1,14 @@
-import React, { useEffect } from "react";
-import { API_OPTIONS } from "../utils/constants";
-import { useDispatch, useSelector } from "react-redux";
-import { addTrailerVideo } from "../utils/moviesSlice";
+import React from "react";
+import { useSelector } from "react-redux";
+import useTrailerVideo from "../customHooks/useTrailerVideo";
 
-const VideoBackground = ({ moiveId }) => {
-  const dispatch=useDispatch();
-  const trailerVideo=useSelector((store)=>store.movies?.trailerVideos);
-
-  const video = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/1022789/videos?language=en-US",//hardcode for a single video 
-      API_OPTIONS
-    );
-    const json = await data.json();
-    const filteredData = json.results.filter((t) => t.type === "Trailer");
-    const trailer = filteredData.length ? filteredData[0] : json.results[0];
-    dispatch(addTrailerVideo(trailer));// we have two opetions here we can use useState for this well but it is better to use redux.
-  };
-  useEffect(() => {
-    video();
-  }, []);
+const VideoBackground = ({ movieId }) => {
+  const trailerVideo = useSelector((store) => store.movies?.trailerVideos);
+  useTrailerVideo(movieId);
 
   return (
-    <div>
-      <iframe
-        width={560}
-        height={315}
+    <div  className="w-screen absolute">
+      <iframe className="w-screen aspect-video"
         src={
           "https://www.youtube.com/embed/" +
           trailerVideo?.key +
