@@ -6,8 +6,9 @@ const VideoTitle = ({ title, overview }) => {
   return (
     <div
       id="text-shadow"
-      className="text-shadow w-[600px] h-[348.609px] mt-60 ml-14 absolute text-white"
+      className="text-shadow w-[600px] h-[348.609px] text-white absolute inset-0 mt-60 ml-12"
     >
+    {/* w-[600px] h-[348.609px] mt-60 ml-14 absolute */}
       <h1
         id="myButton"
         className="text-6xl font-bold transform origin-bottom-left"

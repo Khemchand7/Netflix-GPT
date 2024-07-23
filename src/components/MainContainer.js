@@ -10,12 +10,21 @@ const MainContainer = () => {
   const mainMovie = movies[0];
 
   const { title, overview, id } = mainMovie;
-  return (
-    <div className="">
-      <VideoBackground movieId={id} />
-      <VideoTitle title={title} overview={overview} />
-    </div>
-  );
+//   return (
+//     <div>
+//       <div className="relative">
+//         <VideoBackground movieId={id} />
+//         <VideoTitle title={title} overview={overview} />
+//       </div>
+//     </div>
+//   );
+// };
+return (
+  <div className="relative min-h-screen">
+    <VideoBackground movieId={id} className="absolute inset-0" />
+    <VideoTitle title={title} overview={overview} className="absolute inset-0" />
+  </div>
+);
 };
 
 export default MainContainer;
