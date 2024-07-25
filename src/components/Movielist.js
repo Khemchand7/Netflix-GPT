@@ -15,7 +15,7 @@ const MovieList = ({ title, movies }) => {
               key={movie?.id}
               title={movie?.title}
               poster={movie?.poster_path}
-              className={`w-40 h-52 flex-shrink-0 transition-transform duration-300 transform ${isActive ? 'scale-x-110 scale-y-[1.15] z-20' : 'scale-100 hover:scale-[1.02]'} `}
+              className={`w-40 h-52 flex-shrink-0 transition-transform duration-300 transform ${isActive & title==="Now Playing" ? 'scale-x-110 scale-y-[1.15] z-20' : 'scale-100 hover:scale-[1.02]'} `}
             />
           );
         })}
