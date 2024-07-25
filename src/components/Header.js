@@ -12,13 +12,17 @@ const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store?.user);
   const dispatch = useDispatch();
-  const showSelectBox = useSelector((store) => store.gpt.showGptSearch); //change this when you make multi lang for whole web using this for rendering select box only on gpt search page
-
+  const onGptSearchPage = useSelector((store) => store.gpt.showGptSearch); //change this when you make multi lang for whole web using this for rendering select box only on gpt search page
   const handleGPTPageLanguage = (e) => {
     //onchange event handler ek event generate karega jisko humne yahan catch kia hai aur uski value li hai
     //iski jagah hum useref bhi use kar sakte the
     dispatch(setLang(e.target.value));
   };
+  if (!onGptSearchPage) {
+    dispatch(setLang("eng")); //yahan pr ek bug solve kia hai ki jab hum gpt page se away move kar rhe the to select box me language
+    //eng ho rhi thi magar page ki language same thi jo last time thi dono me difference tha
+    //magar jab hum pure page pr multi lang support denge to simple ise hata dena hai aur componet se condition hata deni hai for conditional rendering.
+  }
 
   const handleShowGppSearch = () => {
     dispatch(toggleGptSearch());
@@ -65,7 +69,7 @@ const Header = () => {
         alt="Netflix Logo"
       ></img>
       <div className="flex justify-between items-center">
-        {showSelectBox && (
+        {onGptSearchPage && (
           <select
             onChange={handleGPTPageLanguage}
             className="block mt-1 rounded-md border bg-[#161616b3] border-[#808080b3] text-white font-bold py-2 px-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -83,7 +87,7 @@ const Header = () => {
               onClick={handleShowGppSearch}
               className="font-bold text-xl text-white p-2 m-2"
             >
-              Gpt Search
+              {onGptSearchPage ? "Homepage" : "Gpt Search"}
             </button>
             <img
               src={user?.photoURL}

@@ -3,14 +3,17 @@ import lang from "../utils/languageConstants/gptSearchPage";
 import { useSelector } from "react-redux";
 
 const GPTSearchBar = () => {
-    const langKey=useSelector(store=>store.config.lang);
+  const langKey = useSelector((store) => store.config.lang);
+  //lang is the name of array and lang[langKey] is lang[eng],lang[hindi],lang[marathi] and so on....
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="grid grid-cols-1 grid-rows-3 text-white justify-items-center  ">
         <h1 className="text-shadow text-[48px] font-[900]">
           {lang[langKey].gptHeader1}
         </h1>
-        <h2 className=" text-shadow text-[24px] font-[500]">{lang[langKey].gptHeader2}</h2>
+        <h2 className=" text-shadow text-[24px] font-[500]">
+          {lang[langKey].gptHeader2}
+        </h2>
         <div>
           <form className="grid grid-cols-12 gap-2">
             <input
