@@ -17,10 +17,18 @@ export const LEARN_MORE_TEXT2 =
   ", and is used for providing, maintaining, and improving the reCAPTCHA service and for general security purposes (it is notused for personalised advertising by Google).";
 
 export const API_OPTIONS = {
-  method: 'GET',
+  method: "GET",
   headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjY3YmI1ZmMyMTMzNTlmNTBhMGZlNzNjNjYyYWZhMSIsIm5iZiI6MTcyMTM4MzQ4OS43Njc0ODQsInN1YiI6IjY2OWEzODQyODMwYzgwZGUwYjNjMzc3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5cRDlkA-8kNt1z3OgorINfxL4Yk-S4GF_wkaSPBjEck'
-  }
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjY3YmI1ZmMyMTMzNTlmNTBhMGZlNzNjNjYyYWZhMSIsIm5iZiI6MTcyMTM4MzQ4OS43Njc0ODQsInN1YiI6IjY2OWEzODQyODMwYzgwZGUwYjNjMzc3MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5cRDlkA-8kNt1z3OgorINfxL4Yk-S4GF_wkaSPBjEck",
+  },
 };
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w780";
+
+export const SUPPORTED_LANGUAGE = [
+  { identifier: "eng", name: "English" },
+  { identifier: "hindi", name: "Hindi" },
+  { identifier: "marathi", name: "Marathi" },
+  { identifier: "spanish", name: "Spanish" },
+];

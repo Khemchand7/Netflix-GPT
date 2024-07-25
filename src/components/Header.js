@@ -4,15 +4,23 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-import { NETFLIX_LOGO } from "../utils/constants";
+import { NETFLIX_LOGO, SUPPORTED_LANGUAGE } from "../utils/constants";
 import { toggleGptSearch } from "../utils/GptSearchSlice";
+import { setLang } from "../utils/configSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store?.user);
   const dispatch = useDispatch();
-  
-  const handleShowGppSearch=()=>{
+  const showSelectBox = useSelector((store) => store.gpt.showGptSearch); //change this when you make multi lang for whole web using this for rendering select box only on gpt search page
+
+  const handleGPTPageLanguage = (e) => {
+    //onchange event handler ek event generate karega jisko humne yahan catch kia hai aur uski value li hai
+    //iski jagah hum useref bhi use kar sakte the
+    dispatch(setLang(e.target.value));
+  };
+
+  const handleShowGppSearch = () => {
     dispatch(toggleGptSearch());
   };
 
@@ -56,12 +64,25 @@ const Header = () => {
         src={NETFLIX_LOGO}
         alt="Netflix Logo"
       ></img>
-      <div>
+      <div className="flex justify-between items-center">
+        {showSelectBox && (
+          <select
+            onChange={handleGPTPageLanguage}
+            className="block mt-1 rounded-md border bg-[#161616b3] border-[#808080b3] text-white font-bold py-2 px-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            {SUPPORTED_LANGUAGE.map((language) => (
+              <option key={language.identifier} value={language.identifier}>
+                {language.name}
+              </option>
+            ))}
+          </select>
+        )}
         {user && (
           <div className="flex justify-between items-center">
-            <button 
-            onClick={handleShowGppSearch}
-            className="font-bold text-xl text-white p-2 m-2">
+            <button
+              onClick={handleShowGppSearch}
+              className="font-bold text-xl text-white p-2 m-2"
+            >
               Gpt Search
             </button>
             <img
