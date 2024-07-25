@@ -17,7 +17,7 @@ const MainContainer = () => {
     const delay = totalCycleTime / movies.length;
 
     // Set the initial movie index
-    dispatch(setIndex(0));
+    dispatch(setIndex(1));
 
     // Create the interval to update the index
     const intervalId = setInterval(() => {
