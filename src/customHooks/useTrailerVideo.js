@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
 import { addTrailerVideo } from "../utils/moviesSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const useTrailerVideo = (movieId) => {
   const dispatch = useDispatch();
+  const trailerVideos = useSelector((store) => store.movies.trailerVideos);
   const video = async () => {
     const data = await fetch(
       "https://api.themoviedb.org/3/movie/" +
@@ -18,7 +19,7 @@ const useTrailerVideo = (movieId) => {
     dispatch(addTrailerVideo(trailer)); // we have two opetions here we can use useState for this well but it is better to use redux.
   };
   useEffect(() => {
-    video();
+    !trailerVideos && video();
   }, [movieId]);
 };
 export default useTrailerVideo;

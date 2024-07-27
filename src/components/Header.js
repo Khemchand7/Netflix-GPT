@@ -7,6 +7,7 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { NETFLIX_LOGO, SUPPORTED_LANGUAGE } from "../utils/constants";
 import { toggleGptSearch } from "../utils/GptSearchSlice";
 import { setLang } from "../utils/configSlice";
+import { IoLanguageSharp } from "react-icons/io5";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -72,11 +73,11 @@ const Header = () => {
         {onGptSearchPage && (
           <select
             onChange={handleGPTPageLanguage}
-            className="block mt-1 rounded-md border bg-[#161616b3] border-[#808080b3] text-white font-bold py-2 px-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="custom-select block mt-1 rounded-md border bg-[#161616b3] border-[#808080b3] text-white font-bold py-2 px-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-white focus:border-white"
           >
             {SUPPORTED_LANGUAGE.map((language) => (
               <option key={language.identifier} value={language.identifier}>
-                {language.name}
+              <IoLanguageSharp /> {language.name}
               </option>
             ))}
           </select>

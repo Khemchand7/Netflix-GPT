@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useRef } from "react";
 import MovieCard from "./MovieCard";
 import { useSelector } from "react-redux";
+import { FaAngleLeft } from "react-icons/fa6";
+import { FaAngleRight } from "react-icons/fa6";
 
 const MovieList = ({ title, movies }) => {
   const currentIndex = useSelector((store) => store.index.index);
+  const movieCarouselRef = useRef();
+
+  const handleLeftScroll = () => {
+    movieCarouselRef.current.scrollTo({
+      left: movieCarouselRef.current.scrollLeft - 500,
+      behavior: "smooth",
+    });
+  };
+
+  const handleRightScroll = () => {
+    movieCarouselRef.current.scrollTo({
+      left: movieCarouselRef.current.scrollLeft + 500,
+      behavior: "smooth",
+    });
+  };
   return (
-    <div className="ml-12">
-      <h2 className="text-shadow text-2xl font-bold mt-4 mb-2 text-white">{title}</h2>
-      <div className="flex flex-nowrap gap-1 overflow-x-scroll">
+    <div className="px-4 relative">
+      <h1 className="text-lg md:text-2xl py-4 text-white font-semibold">
+        {title}
+      </h1>
+      <div
+        ref={movieCarouselRef}
+        className="flex overflow-x-scroll scroll-smooth no-scrollbar movies"
+      >
+        <div
+          className="text-shadow text-white absolute z-30 top-[55%] left-[2.5%]  p-2 bg-[#161616b3] rounded-full cursor-pointer hover:scale-110 hover:bg-[#0c0c0cb3] transition-transform duration-300"
+          onClick={handleLeftScroll}
+        >
+          <FaAngleLeft fontSize={30} />
+        </div>
+        <div className="flex gap-4">
         {movies?.map((movie, idx) => {
           const isActive = idx === currentIndex;
           return (
@@ -19,6 +48,13 @@ const MovieList = ({ title, movies }) => {
             />
           );
         })}
+      </div>
+        <div
+          className="text-shadow text-white absolute z-30 top-[55%] right-[1.2%]  p-2 bg-[#161616b3] rounded-full cursor-pointer hover:scale-110 hover:bg-[#0c0c0cb3] transition-transform duration-300"
+          onClick={handleRightScroll}
+        >
+          <FaAngleRight fontSize={30} />
+        </div>
       </div>
     </div>
   );
