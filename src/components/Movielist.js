@@ -22,8 +22,8 @@ const MovieList = ({ title, movies }) => {
     });
   };
   return (
-    <div className="px-4 relative">
-      <h1 className="text-lg md:text-2xl py-4 text-white font-semibold">
+    <div className="px-2 md:px-4 relative">
+      <h1 className="text-sm md:text-2xl py-4 text-white font-semibold">
         {title}
       </h1>
       <div
@@ -31,12 +31,12 @@ const MovieList = ({ title, movies }) => {
         className="flex overflow-x-scroll scroll-smooth no-scrollbar movies"
       >
         <div
-          className="text-shadow text-white absolute z-30 top-[55%] left-[2.5%]  p-2 bg-[#161616b3] rounded-full cursor-pointer hover:scale-110 hover:bg-[#0c0c0cb3] transition-transform duration-300"
+          className="text-shadow text-white absolute z-30 top-[55%] left-[2.5%] p-1 md:p-2 bg-[#161616b3] rounded-full cursor-pointer hover:scale-110 hover:bg-[#0c0c0cb3] transition-transform duration-300"
           onClick={handleLeftScroll}
         >
-          <FaAngleLeft fontSize={30} />
+          <FaAngleLeft fontSize={25} />
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-1 md:gap-4">
         {movies?.map((movie, idx) => {
           const isActive = idx === currentIndex;
           return (
@@ -44,16 +44,16 @@ const MovieList = ({ title, movies }) => {
               key={movie?.id}
               title={movie?.title}
               poster={movie?.poster_path}
-              className={`w-40 h-52 flex-shrink-0 transition-transform duration-300 transform ${isActive & title==="Now Playing" ? 'scale-x-110 scale-y-[1.15] z-20' : 'scale-100 hover:scale-[1.02]'} `}
+              className={`w-20 md:w-40 h-28 md:h-52 flex-shrink-0 transition-transform duration-300 transform ${isActive & title==="Now Playing" ? 'scale-x-110 scale-y-[1.15] z-20' : 'scale-100 hover:scale-[1.02]'} `}
             />
           );
         })}
       </div>
         <div
-          className="text-shadow text-white absolute z-30 top-[55%] right-[1.2%]  p-2 bg-[#161616b3] rounded-full cursor-pointer hover:scale-110 hover:bg-[#0c0c0cb3] transition-transform duration-300"
+          className="text-shadow text-white absolute z-30 top-[55%] right-[1.2%] p-1 md:p-2 bg-[#161616b3] rounded-full cursor-pointer hover:scale-110 hover:bg-[#0c0c0cb3] transition-transform duration-300"
           onClick={handleRightScroll}
         >
-          <FaAngleRight fontSize={30} />
+          <FaAngleRight fontSize={25} />
         </div>
       </div>
     </div>

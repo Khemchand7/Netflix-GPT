@@ -6,16 +6,16 @@ const VideoTitle = ({ title, overview }) => {
   return (
     <div
       id="text-shadow"
-      className="text-shadow w-[600px] h-[348.609px] text-white absolute inset-0 mt-60 ml-12"
+      className="text-shadow w-screen h-screen md:w-[600px] md:h-[348.609px] text-white absolute inset-0 mt-60 ml-12"
     >
     {/* w-[600px] h-[348.609px] mt-60 ml-14 absolute */}
       <h1
         id="myButton"
-        className="text-6xl font-bold transform origin-bottom-left"
+        className=" text-2xl md:text-6xl font-bold transform origin-bottom-left"
       >
         {title}
       </h1>
-      <p className="font-[500] text-lg mb-3 ">{overview}</p>
+      <p className="hidden md:inline-block font-normal md:font-[500] text-xs md:text-lg mb-3 ">{overview}</p>
       <div className="flex items-center text-xl font-[500]">
         <button className="bg-white rounded-[4px] py-[0.35rem] px-[1rem] mr-[0.7rem] text-black hover:bg-opacity-70">
           <BiSolidRightArrow className="inline w-7 h-7 mb-1" /> Play

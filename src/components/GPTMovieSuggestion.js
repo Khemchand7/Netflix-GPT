@@ -8,10 +8,7 @@ const GPTMovieSuggestion = () => {
   if (!gptMovies) return null;
   console.log(gpt);
   return (
-    <div className="bg-[#161616b3] opacity-95 my-8 p-4">
-    <div>
-      <h1 className="text-shadow text-white font-extrabold text-2xl mx-[32%]">Here are some recommended movies!!</h1>
-    </div>
+    <div className="bg-[#161616b3] opacity-95 my-8 p-4 w-full h-full">
       <div className="opacity-100">
       {gptMovies.map((movieName, index) => (
         <MovieList

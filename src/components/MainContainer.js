@@ -17,7 +17,7 @@ const MainContainer = () => {
     const delay = totalCycleTime / movies.length;
 
     // Set the initial movie index
-    dispatch(setIndex(1));
+    dispatch(setIndex(0));
 
     // Create the interval to update the index
     const intervalId = setInterval(() => {
@@ -34,7 +34,7 @@ const MainContainer = () => {
   const { title, overview, id } = currentMovie;
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative">
       <VideoBackground movieId={id} className="absolute inset-0" />
       <VideoTitle
         title={title}

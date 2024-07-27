@@ -107,20 +107,20 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className="absolute">
+      <div className="absolute ">
         <img
           src={NETFLIX_BGD_IMG}
           alt="Background Img"
-          className="object-cover w-full h-full"
+          className="fixed object-cover w-full h-full"
         ></img>
       </div>
       <form
         onSubmit={(e) => {
           e.preventDefault(); //bcs form ki normal tendency submit hone ki hai to hum jab email aur pass likne ke bad uski value use karne ka try kar rhe the to wo refresh hokar uski value chali jaa rhi thi so wh have used this
         }}
-        className="absolute bg-black sm:m-0 md:mx-auto sm:my-20 md:my-36 sm:w-full lg:w-4/12 px-[68px] sm:py-[20px] md:py-[38px]  left-0 right-0 text-white rounded-lg bg-opacity-80 flex flex-col gap-4"
+        className="translate-y-24 md:translate-y-0 absolute bg-black m-0 md:mx-auto sm:my-20 md:my-36 w-full md:w-6/12 px-[68px] sm:py-[20px] md:py-[38px]  left-0 right-0 text-white rounded-lg bg-opacity-80 flex flex-col gap-4"
       >
-        <h1 className="text-[2rem] font-[700] mb-[20px]">
+        <h1 className="text-[2rem] font-[700] m-[30px]">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
@@ -174,7 +174,7 @@ const Login = () => {
             Remember Me
           </label>
         </div>
-        <div className="inline-flex text-lg">
+        <div className="inline-flex  md:text-lg">
           <p className=" text-[#ffffffb3] text-left">
             {isSignInForm ? "New to Netflix?" : "Already a User"}{" "}
           </p>
@@ -186,7 +186,7 @@ const Login = () => {
           </span>
         </div>
         <div className="inline-flex">
-          <p className=" text-[#ffffffb3] text-sm">
+          <p className=" text-[#ffffffb3] text-xs md:text-sm">
             This page is protected by Google reCAPTCHA to ensure you're not a
             bot.
             <span

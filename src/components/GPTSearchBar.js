@@ -55,25 +55,25 @@ const GPTSearchBar = () => {
     dispatch(addTmdbGptmovieResult({gptMovies:gptMovies,tmdbMovies:tmdbResults}));
   };
   return (
-    <div className="flex justify-center items-center">
-      <div className="grid grid-cols-1 grid-rows-2 text-white justify-items-center mt-20 ">
-        <h1 className="text-shadow text-[48px] font-[900]">
+    <div className="flex justify-center items-center text-nowrap">
+      <div className="grid grid-cols-1 grid-rows-2 text-white justify-items-center mt-24 ">
+        <h1 className="text-shadow text-xl md:text-[48px] font-[500] md:font-[900]">
           {lang[langKey].gptHeader1}
         </h1>
         <div>
           <form
-            className="grid grid-cols-12 gap-2"
+            className="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-12"
             onSubmit={(e) => e.preventDefault()}
           >
             <input
               ref={searchBoxText}
               type="text"
               placeholder={lang[langKey].gptPlaceHolder}
-              className="col-span-9 w-full m-4 p-3  bg-[#161616b3] border-[#808080b3] border-[0.1rem] rounded"
+              className="text- md:text-xl col-span-4 sm:col-span-6 md:col-span-9 w-full ml-[2%] m-4 p-3  bg-[#161616b3] border-[#808080b3] border-[0.1rem] rounded"
             />
             <button
               type="submit"
-              className="text-shadow col-span-3 w-full m-4 p-3 bg-[rgb(229,9,20)] hover:bg-red-600  text-3xl font-[600] rounded"
+              className="text-shadow col-span-2 md:col-span-3 w-full mr-[2%] m-4 p-3 bg-[rgb(229,9,20)] hover:bg-red-600 text-lg md:text-3xl font-[600] rounded"
               onClick={handleGptSearchClick}
             >
               {lang[langKey].gptButton}

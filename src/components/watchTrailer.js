@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { API_OPTIONS } from "../utils/constants";
-import { onAuthStateChanged } from "firebase/auth";
+import { API_OPTIONS, NETFLIX_LOGO } from "../utils/constants";
 import { auth } from "../utils/firebase";
-import Logo from "../assets/Logo.png";
+import { onAuthStateChanged } from "firebase/auth";
+
 
 const WatchTrailer = () => {
   const {movieId} = useParams();
@@ -15,14 +15,14 @@ const WatchTrailer = () => {
     fetchMovieTrailer();
   }, []);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        navigate("/");
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+//   useEffect(() => {
+//     const unsubscribe = onAuthStateChanged(auth, (user) => {
+//       if (!user) {
+//         navigate("/");
+//       }
+//     });
+//     return () => unsubscribe();
+//   }, []);
 
   const fetchMovieTrailer = async () => {
     const movie = await fetch(
@@ -32,7 +32,7 @@ const WatchTrailer = () => {
       API_OPTIONS
     );
     const json = await movie.json();
-    const filterData = json.results.filter(
+    const filterData = json?.results.filter(
       (video) => video.type === "Trailer" || video.name === "Official Trailer"
     );
     setMovieKey(filterData[0]?.key);
@@ -42,7 +42,7 @@ const WatchTrailer = () => {
     <>
       <div className="fixed w-screen px-2 md:px-12 py-2 bg-black ">
         <Link to="/browse">
-          <img src={Logo} alt="logo" className="w-24 md:w-32" />
+          <img src={NETFLIX_LOGO} alt="logo" className="w-24 md:w-32" />
         </Link>
       </div>
       {movieKey && (

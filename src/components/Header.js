@@ -63,7 +63,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
+    <div className="absolute w-screen md:px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
       <img
         className=" object-cover w-44 fill-[rgb(229,9,20)]"
         src={NETFLIX_LOGO}
@@ -73,7 +73,7 @@ const Header = () => {
         {onGptSearchPage && (
           <select
             onChange={handleGPTPageLanguage}
-            className="custom-select block mt-1 rounded-md border bg-[#161616b3] border-[#808080b3] text-white font-bold py-2 px-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-white focus:border-white"
+            className="custom-select block mt-1 rounded-md border bg-[#161616b3] border-[#808080b3] text-white font-bold py-2 md:px-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-white focus:border-white"
           >
             {SUPPORTED_LANGUAGE.map((language) => (
               <option key={language.identifier} value={language.identifier}>
@@ -86,7 +86,7 @@ const Header = () => {
           <div className="flex justify-between items-center">
             <button
               onClick={handleShowGppSearch}
-              className="font-bold text-xl text-white p-2 m-2"
+              className="font-bold text-sm md:text-xl text-white p-2 m-2"
             >
               {onGptSearchPage ? "Homepage" : "Gpt Search"}
             </button>

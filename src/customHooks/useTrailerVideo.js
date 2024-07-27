@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const useTrailerVideo = (movieId) => {
   const dispatch = useDispatch();
-  const trailerVideos = useSelector((store) => store.movies.trailerVideos);
+  // const trailerVideos = useSelector((store) => store.movies.trailerVideos);
   const video = async () => {
     const data = await fetch(
       "https://api.themoviedb.org/3/movie/" +
@@ -19,7 +19,8 @@ const useTrailerVideo = (movieId) => {
     dispatch(addTrailerVideo(trailer)); // we have two opetions here we can use useState for this well but it is better to use redux.
   };
   useEffect(() => {
-    !trailerVideos && video();
+    // !trailerVideos && // Memoization technique is creating error  in background playing movie as videos are getting sync with title
+    video();
   }, [movieId]);
 };
 export default useTrailerVideo;
