@@ -1,3 +1,4 @@
+import { FaSearch } from "react-icons/fa";
 import React, { useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
@@ -9,7 +10,12 @@ import { toggleGptSearch } from "../utils/GptSearchSlice";
 import { setLang } from "../utils/configSlice";
 import { IoLanguageSharp } from "react-icons/io5";
 
-const Header = () => {
+const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
+  const handleMobileMenuToggle = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
   const navigate = useNavigate();
   const user = useSelector((store) => store?.user);
   const dispatch = useDispatch();
@@ -63,14 +69,94 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute w-screen md:px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
-      <img
-        className=" object-cover w-44 fill-[rgb(229,9,20)]"
-        src={NETFLIX_LOGO}
-        alt="Netflix Logo"
-      ></img>
-      <div className="flex justify-between items-center">
-        {onGptSearchPage && (
+    <nav className="bg-gradient-to-b from-black text-white border-gray-200 px-4 lg:px-6 dark:bg-gray-800 relative">
+      <div className="w-full flex flex-wrap justify-between items-center mx-auto max-w-screen-xl py-3 absolute z-[999]">
+        <a href="https://flowbite.com" className="flex items-center">
+          <img
+            src={NETFLIX_LOGO}
+            className="mr-3 w-20 h-10 sm:h-9 object-cover fill-[rgb(229,9,20)]"
+            alt="Flowbite Logo"
+          />
+        </a>
+        <div className="flex items-center lg:order-2">
+          { user && <button className="font-medium rounded-lg text-xl px-4 lg:px-5 py-2 lg:py-2.5 mr-2 " onClick={handleShowGppSearch}>
+            {!onGptSearchPage && <FaSearch className="inline" />} {onGptSearchPage ? "Homepage" : "Gpt Search"}
+          </button>} 
+          {user && <div onClick={handleSignOut} className="cursor-pointer text-white bg-[rgb(229,9,20)]  hover:bg-red-600 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+            Sign Out
+          </div>}
+          <button
+            onClick={handleMobileMenuToggle}
+            type="button"
+            className="inline-flex items-center p-2 ml-1 text-xl text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="mobile-menu-2"
+            aria-expanded={isMobileMenuOpen}
+          >
+            <span className="sr-only">Open main menu</span>
+            <svg
+              className={`w-6 h-6 text-white ${isMobileMenuOpen ? "hidden" : "block"}`}
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+            <svg
+              className={`w-6 h-6 ${isMobileMenuOpen ? "block" : "hidden"}`}
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        {user && <div
+          className={`${
+            isMobileMenuOpen ? "flex bg-[#161616b3] w-1/2 mr-0" : "hidden"
+          } justify-between items-center w-full lg:flex lg:w-auto lg:order-1`}
+          id="mobile-menu-2"
+        >
+          <ul className=" text-shadow flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <li>
+              <div
+                className="block py-2 pr-4 pl-3 text-white rounded lg:bg-transparent lg:text-primary-700 lg:p-0 hover:text-white"
+                aria-current="page"
+              >
+                Home
+              </div>
+            </li>
+            <li>
+              <div className="block py-2 pr-4 pl-3 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 hover:text-white">
+                TV Shows
+              </div>
+            </li>
+            <li>
+              <div className="block py-2 pr-4 pl-3 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 hover:text-white">
+                Movies
+              </div>
+            </li>
+            <li>
+              <div className="block py-2 pr-4 pl-3 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 hover:text-white">
+                New & Popular
+              </div>
+            </li>
+            <li>
+              <div className="block py-2 pr-4 pl-3 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 hover:text-white">
+                My List
+              </div>
+            </li>
+            <li>
+              <div className="block py-2 pr-4 pl-3 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 hover:text-white">
+              {onGptSearchPage && (
           <select
             onChange={handleGPTPageLanguage}
             className="custom-select block mt-1 rounded-md border bg-[#161616b3] border-[#808080b3] text-white font-bold py-2 md:px-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-white focus:border-white"
@@ -82,30 +168,14 @@ const Header = () => {
             ))}
           </select>
         )}
-        {user && (
-          <div className="flex justify-between items-center">
-            <button
-              onClick={handleShowGppSearch}
-              className="font-bold text-sm md:text-xl text-white p-2 m-2"
-            >
-              {onGptSearchPage ? "Homepage" : "Gpt Search"}
-            </button>
-            <img
-              src={user?.photoURL}
-              alt="PhotURL"
-              className="object-cover h-10 w-10"
-            ></img>
-            <button
-              onClick={handleSignOut}
-              className="font-bold text-xl text-white p-2 m-2"
-            >
-              Signout
-            </button>
-          </div>
-        )}
+
+              </div>
+            </li>
+          </ul>
+        </div>}
       </div>
-    </div>
+    </nav>
   );
 };
 
-export default Header;
+export default Navbar;

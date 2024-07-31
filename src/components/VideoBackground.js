@@ -9,7 +9,7 @@ const VideoBackground = ({ movieId }) => {
   useTrailerVideo(movieId);
 
   return (
-    <div className="relative w-screen overflow-hidden" >
+    <div className="relative w-screen overflow-hidden -z-50" >
     
       <iframe className="w-screen aspect-video"
         src={
